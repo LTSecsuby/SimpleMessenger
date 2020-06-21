@@ -1,0 +1,17 @@
+.toolbar-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.button-toggle-group {
+  padding: 2%;
+  margin: 1%;
+  display: flex;
+  justify-content: space-between;
+  border: none;
+}
+
+.button-toggle {
+  border-radius: 5px;
+}

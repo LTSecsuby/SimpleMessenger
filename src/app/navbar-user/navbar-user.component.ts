@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {DataService} from '../shared/data.service';
+
+import { TRIGGER_FETCH_FRIENDS } from '../shared/data.service';
+import { TRIGGER_CHAT } from '../shared/data.service';
+import { TRIGGER_CONTACTS } from '../shared/data.service';
+import { TRIGGER_NOTIFICATION } from '../shared/data.service';
+
 
 @Component({
   selector: 'app-navbar-user',
@@ -7,8 +14,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./navbar-user.component.css']
 })
 export class NavbarUserComponent implements OnInit {
+  TRIGGER_FETCH_FRIENDS = TRIGGER_FETCH_FRIENDS;
+  TRIGGER_CHAT = TRIGGER_CHAT;
+  TRIGGER_CONTACTS = TRIGGER_CONTACTS;
+  TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
   }
@@ -16,4 +28,9 @@ export class NavbarUserComponent implements OnInit {
   onLogout() {
     this.router.navigate(['/start']);
   }
+
+  onChangeContent(trigger: string) {
+    this.dataService.setUserNavbarContent(trigger);
+  }
+
 }

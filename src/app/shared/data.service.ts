@@ -7,9 +7,18 @@ export interface User {
   dateCreate: Date;
 }
 
+export const TRIGGER_FETCH_FRIENDS = 'fetch_friend';
+export const TRIGGER_CHAT = 'chat';
+export const TRIGGER_CONTACTS = 'contacts';
+export const TRIGGER_NOTIFICATION = 'notifications';
+
 @Injectable({providedIn: 'root'})
 export class DataService{
 
+  public onFetchFriends = false;
+  public onChat = false;
+  public onContacts = false;
+  public onNotification = false;
   public checkNewUser = true;
   public arrayUser: User[] = [];
   public id = 0;
@@ -64,4 +73,39 @@ export class DataService{
     });
     return res;
   }
+
+  setUserNavbarContent(trigger: string) {
+    switch (trigger) {
+      case TRIGGER_FETCH_FRIENDS:
+      this.onFetchFriends = true;
+      this.onChat = false;
+      this.onContacts = false;
+      this.onNotification = false;
+        break;
+      case TRIGGER_CHAT:
+        this.onFetchFriends = false;
+        this.onChat = true;
+        this.onContacts = false;
+        this.onNotification = false;
+        break;
+      case TRIGGER_CONTACTS:
+        this.onFetchFriends = false;
+        this.onChat = false;
+        this.onContacts = true;
+        this.onNotification = false;
+        break;
+      case TRIGGER_NOTIFICATION:
+        this.onFetchFriends = false;
+        this.onChat = false;
+        this.onContacts = false;
+        this.onNotification = true;
+        break;
+      default:
+        this.onFetchFriends = false;
+        this.onChat = false;
+        this.onContacts = false;
+        this.onNotification = false;
+    }
+  }
+
 }

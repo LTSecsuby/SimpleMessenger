@@ -36,6 +36,5 @@ export class StartMenuComponent implements OnInit {
 
   onSingup() {
     this.dataService.createNewUser(this.valueLogin, this.valuePassword);
-    console.log(this.dataService.getAllUser());
   }
 }

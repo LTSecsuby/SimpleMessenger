@@ -11,30 +11,32 @@
     </mat-button-toggle-group>
 
     <mat-card *ngIf="login">
-      <form class="example-form">
-        <mat-form-field class="example-full-width">
+      <form>
+        <mat-form-field>
           <mat-label>Log in</mat-label>
           <input matInput [(ngModel)]="valueLogin" [ngModelOptions]="{ standalone: true }">
         </mat-form-field>
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>Password</mat-label>
           <input matInput [(ngModel)]="valuePassword" [ngModelOptions]="{ standalone: true }">
         </mat-form-field>
       </form>
-      <button (click)="onLogin()" [disabled]="valueLogin.length < 5 || valuePassword.length < 8" mat-raised-button color="primary">LOGIN</button>
+      <button (click)="onLogin()" [disabled]="valueLogin.length < 1 || valuePassword.length < 1" mat-raised-button color="primary">LOGIN</button>
     </mat-card>
 
     <mat-card *ngIf="singup">
-      <form class="example-form">
-        <mat-form-field class="example-full-width">
+      <form>
+        <mat-form-field>
           <mat-label>Log in</mat-label>
-          <input matInput [(ngModel)]="valueLogin" [ngModelOptions]="{ standalone: true }">
+          <input matInput required [(ngModel)]="valueLogin" [ngModelOptions]="{ standalone: true }">
+          <mat-hint>minimum 5 characters</mat-hint>
         </mat-form-field>
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>Password</mat-label>
-          <input matInput [(ngModel)]="valuePassword" [ngModelOptions]="{ standalone: true }">
+          <input matInput required [(ngModel)]="valuePassword" [ngModelOptions]="{ standalone: true }">
+          <mat-hint>minimum 8 characters</mat-hint>
         </mat-form-field>
       </form>
       <button (click)="onSingup()" [disabled]="valueLogin.length < 5 || valuePassword.length < 8" mat-raised-button color="primary">SINGUP</button>
