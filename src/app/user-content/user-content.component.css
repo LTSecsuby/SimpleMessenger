@@ -1,0 +1,32 @@
+.user-content-wrapper {
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    " navbar-user toolbar-user "
+    " navbar-content toolbar-content ";
+}
+
+.navbar-user {
+  grid-area: navbar-user;
+  background-color: #deebff;
+  border: 1px solid silver;
+}
+
+.navbar-content {
+  grid-area: navbar-content;
+  background-color: #deebff;
+  border: 1px solid silver;
+}
+
+.toolbar-user {
+  grid-area: toolbar-user;
+  background-color: white;
+  border: 1px solid silver;
+}
+
+.toolbar-content {
+  grid-area: toolbar-content;
+  background-color: white;
+  border: 1px solid silver;
+}

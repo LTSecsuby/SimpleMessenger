@@ -1,1 +1,46 @@
-<p>navbar-user works!</p>
+<mat-toolbar color="primary">
+
+  <mat-toolbar-row>
+
+    <span>Username</span>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>account_box</mat-icon>
+        <span>User</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings_applications</mat-icon>
+        <span>Settings</span>
+      </button>
+      <button (click)="onLogout()" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Exit</span>
+      </button>
+    </mat-menu>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-button-toggle-group #group="matButtonToggleGroup">
+  <mat-button-toggle value="person_add_alt_1">
+    <mat-icon>person_add_alt_1</mat-icon>
+  </mat-button-toggle>
+  <mat-button-toggle value="comment">
+    <mat-icon>comment</mat-icon>
+  </mat-button-toggle>
+  <mat-button-toggle value="contacts">
+    <mat-icon>contacts</mat-icon>
+  </mat-button-toggle>
+  <mat-button-toggle value="notifications">
+    <mat-icon>notifications</mat-icon>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+<div *ngIf="group.value === 'person_add_alt_1'">{{group.value}}</div>
+<div *ngIf="group.value === 'comment'">{{group.value}}</div>
+<div *ngIf="group.value === 'contacts'">{{group.value}}</div>
+<div *ngIf="group.value === 'notifications'">{{group.value}}</div>

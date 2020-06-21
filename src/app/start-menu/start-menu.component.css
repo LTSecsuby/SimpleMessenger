@@ -1,0 +1,9 @@
+.start-menu{
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 2px;
+  border: 2px solid black;
+  max-width: 30%;
+  text-align: center;
+  padding: 2%;
+}

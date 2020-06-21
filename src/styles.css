@@ -1,5 +1,8 @@
 .app-wrapper{
   margin: 0 auto;
-  max-width: 1600px;
-  background-color: black;
+  max-width: 80%;
+  background-color: cornflowerblue;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
