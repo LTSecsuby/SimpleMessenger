@@ -23,6 +23,7 @@
   grid-area: toolbar-user;
   background-color: white;
   border: 1px solid silver;
+  padding: 1%;
 }
 
 .toolbar-content {

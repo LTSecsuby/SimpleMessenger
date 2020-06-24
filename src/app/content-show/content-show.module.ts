@@ -4,16 +4,16 @@ import {ContentWrapperComponent} from './components/content-wrapper/content-wrap
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list';
-import {ContentHeaderComponent} from './components/content-header/content-header.component';
+import {ContentDisplayComponent} from './components/content-display/content-display.component';
 import {ContentUserComponent} from './components/content-user/content-user.component';
 
 @NgModule({
   declarations: [ContentWrapperComponent,
-    ContentHeaderComponent,
+    ContentDisplayComponent,
     ContentUserComponent],
   exports: [
     ContentWrapperComponent,
-    ContentHeaderComponent,
+    ContentDisplayComponent,
     ContentUserComponent
   ],
   imports: [

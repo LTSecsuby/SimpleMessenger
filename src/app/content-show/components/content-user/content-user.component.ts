@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-content-user',
@@ -6,7 +6,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./content-user.component.css']
 })
 export class ContentUserComponent implements OnInit {
-
+  @Input() user: any;
+  public defaultImage = '../../../../assets/login-img.png';
   constructor() { }
 
   ngOnInit(): void {}
