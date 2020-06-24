@@ -1,0 +1,13 @@
+.image-account-user {
+  max-width: 10%;
+  height: auto;
+}
+
+.wrapper-list {
+  display: flex;
+  align-items: center;
+}
+
+.login-account-user {
+  padding-left: 5%;
+}

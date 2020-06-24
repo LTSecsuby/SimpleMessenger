@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../shared/data.service';
+import {DataService, User} from '../shared/data.service';
 
 import { TRIGGER_FETCH_FRIENDS } from '../shared/data.service';
 import { TRIGGER_CHAT } from '../shared/data.service';
@@ -16,10 +16,14 @@ export class NavbarContentComponent implements OnInit {
   TRIGGER_CHAT = TRIGGER_CHAT;
   TRIGGER_CONTACTS = TRIGGER_CONTACTS;
   TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
+  public arrayItems: Object[] = [];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.arrayItems.push({id: '1', login: 'Evgen'});
+    this.arrayItems.push({id: '2', login: 'Evgeniy', img: '../../assets/login-img.png'});
+    this.arrayItems.push({id: '3', login: 'Eugene', img: '../../assets/login-img.png'});
   }
 
   getActions(action: string): boolean {

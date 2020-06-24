@@ -30,13 +30,13 @@
         <mat-form-field>
           <mat-label>Log in</mat-label>
           <input matInput required [(ngModel)]="valueLogin" [ngModelOptions]="{ standalone: true }">
-          <mat-hint>minimum 5 characters</mat-hint>
+          <mat-hint align="end">minimum 5 characters</mat-hint>
         </mat-form-field>
         <br>
         <mat-form-field>
           <mat-label>Password</mat-label>
           <input matInput required [(ngModel)]="valuePassword" [ngModelOptions]="{ standalone: true }">
-          <mat-hint>minimum 8 characters</mat-hint>
+          <mat-hint align="end">minimum 8 characters</mat-hint>
         </mat-form-field>
       </form>
       <button (click)="onSingup()" [disabled]="valueLogin.length < 5 || valuePassword.length < 8" mat-raised-button color="primary">SINGUP</button>

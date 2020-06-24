@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { UserContentComponent } from './user-content/user-content.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {ContentShowModule} from './content-show/content-show.module';
 
 const appRoutes: Routes = [
   { path: '', component: StartMenuComponent },
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     MatInputModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    MatMenuModule
+    MatMenuModule,
+    ContentShowModule
   ],
   providers: [],
   bootstrap: [AppComponent]
