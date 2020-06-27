@@ -6,21 +6,30 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list';
 import {ContentDisplayComponent} from './components/content-display/content-display.component';
 import {ContentUserComponent} from './components/content-user/content-user.component';
+import {InputUserPanelComponent} from './components/input-user-panel/input-user-panel.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [ContentWrapperComponent,
     ContentDisplayComponent,
-    ContentUserComponent],
+    ContentUserComponent,
+    InputUserPanelComponent],
   exports: [
     ContentWrapperComponent,
     ContentDisplayComponent,
-    ContentUserComponent
+    ContentUserComponent,
+    InputUserPanelComponent
   ],
   imports: [
     CommonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatListModule
+    MatListModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class ContentShowModule { }

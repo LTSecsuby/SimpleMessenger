@@ -1,13 +1,18 @@
-.image-account-user {
-  max-width: 10%;
-  height: auto;
-}
-
-.wrapper-list {
+.msg-card-wrapper {
+  padding: 1%;
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.login-account-user {
-  padding-left: 5%;
+.msg-user {
+  align-self: flex-end;
+  text-align: end;
+  background-color: #deebff;
+}
+
+.msg-friend {
+  align-self: flex-start;
+  text-align: start;
+  background-color: #deebff;
 }

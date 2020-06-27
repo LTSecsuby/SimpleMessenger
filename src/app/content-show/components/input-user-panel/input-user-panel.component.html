@@ -1,0 +1,11 @@
+<form class="user-input-form">
+  <mat-form-field appearance="outline" class="user-input-field">
+    <mat-label class="user-input-label">Message</mat-label>
+    <input matInput #message maxlength="500">
+    <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
+  </mat-form-field>
+  <button mat-fab [disabled]="message.value.length === 0" class="user-input-button" color="primary" aria-label="user_send_button">
+    <mat-icon>send</mat-icon>
+  </button>
+</form>
+

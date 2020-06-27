@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-content-display',
@@ -6,9 +6,19 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./content-display.component.css']
 })
 export class ContentDisplayComponent implements OnInit {
+  @Input() userMsg: Object[];
+  @Input() friendMsg: Object[];
+  @Input() userName: string;
+  result: any;
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.result = this.userMsg.concat(this.friendMsg);
+    this.result.sort(this.sortByField('date'));
+  }
 
+  sortByField(field) {
+    return (a, b) => a[field] > b[field] ? 1 : -1;
+  }
 }

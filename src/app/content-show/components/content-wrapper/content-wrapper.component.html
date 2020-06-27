@@ -1,8 +1,8 @@
 <mat-selection-list #user [multiple]="false">
   <mat-list-option *ngFor="let item of contentItem">
     <div (click)="getUser(item.login)" class="wrapper-list">
-      <img class="image-account-user" mat-card-image src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
-      <span class="login-account-user">{{item.login}}</span>
+      <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
+      <div class="login-account-user">{{item.login}}</div>
     </div>
   </mat-list-option>
 </mat-selection-list>
