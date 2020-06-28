@@ -1,7 +1,13 @@
-<p *ngIf="getActions('TRIGGER_FETCH_FRIENDS')">FETCH_FRIENDS</p>
-<p *ngIf="getActions('TRIGGER_CHAT')">CHAT</p>
-<p *ngIf="getActions('TRIGGER_CONTACTS')">CONTACTS</p>
-<p *ngIf="getActions('TRIGGER_NOTIFICATION')">NOTIFICATIONS</p>
-
-<app-content-wrapper [contentItem]="arrayItems"></app-content-wrapper>
+<app-content-wrapper *ngIf="getActions(TRIGGER_FETCH_FRIENDS)"
+                     [titleContent]="TRIGGER_FETCH_FRIENDS"
+                     [contentItem]="arrayItems"></app-content-wrapper>
+<app-content-wrapper *ngIf="getActions(TRIGGER_CHAT)"
+                     [titleContent]="TRIGGER_CHAT"
+                     [contentItem]="arrayItems"></app-content-wrapper>
+<app-content-wrapper *ngIf="getActions(TRIGGER_CONTACTS)"
+                     [titleContent]="TRIGGER_CONTACTS"
+                     [contentItem]="arrayItems"></app-content-wrapper>
+<app-content-wrapper *ngIf="getActions(TRIGGER_NOTIFICATION)"
+                     [titleContent]="TRIGGER_NOTIFICATION"
+                     [contentItem]="arrayItems"></app-content-wrapper>
 

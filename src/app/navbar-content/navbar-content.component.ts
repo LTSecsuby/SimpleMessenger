@@ -27,16 +27,16 @@ export class NavbarContentComponent implements OnInit {
   }
 
   getActions(action: string): boolean {
-    if (action === 'TRIGGER_FETCH_FRIENDS') {
+    if (action === TRIGGER_FETCH_FRIENDS) {
       return this.dataService.onFetchFriends;
     }
-    if (action === 'TRIGGER_CHAT') {
+    if (action === TRIGGER_CHAT) {
       return this.dataService.onChat;
     }
-    if (action === 'TRIGGER_CONTACTS') {
+    if (action === TRIGGER_CONTACTS) {
       return this.dataService.onContacts;
     }
-    if (action === 'TRIGGER_NOTIFICATION') {
+    if (action === TRIGGER_NOTIFICATION) {
       return this.dataService.onNotification;
     }
   }

@@ -1,4 +1,11 @@
 .wrapper-list {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  padding: 1% 2%;
+}
+
+.wrapper-account-user {
   display: flex;
   align-items: center;
 }
@@ -12,3 +19,6 @@
   height: auto;
 }
 
+.add-friend-button {
+  align-items: end;
+}

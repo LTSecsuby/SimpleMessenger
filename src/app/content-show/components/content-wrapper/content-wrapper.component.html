@@ -1,8 +1,52 @@
-<mat-selection-list #user [multiple]="false">
-  <mat-list-option *ngFor="let item of contentItem">
-    <div (click)="getUser(item.login)" class="wrapper-list">
-      <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
-      <div class="login-account-user">{{item.login}}</div>
-    </div>
-  </mat-list-option>
-</mat-selection-list>
+<mat-card>{{titleContent}}</mat-card>
+<div *ngIf="getActions(TRIGGER_FETCH_FRIENDS)">
+  <form class="user-input-form">
+    <mat-form-field appearance="outline" class="user-input-field">
+      <mat-label class="user-input-label">Add contact</mat-label>
+      <input matInput #message maxlength="50">
+      <mat-hint align="end">{{message.value.length}} / 50</mat-hint>
+    </mat-form-field>
+    <button mat-fab [disabled]="message.value.length === 0" class="user-input-button" color="primary" aria-label="user_send_button">
+      <mat-icon>send</mat-icon>
+    </button>
+  </form>
+  <div *ngFor="let item of contentItem">
+      <mat-card class="wrapper-list">
+        <div class="wrapper-account-user">
+          <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
+          <div class="login-account-user">{{item.login}}</div>
+        </div>
+        <button mat-raised-button color="primary" class="add-friend-button" (click)="getUser(item.login)">Add</button>
+      </mat-card>
+  </div>
+</div>
+<div *ngIf="getActions(TRIGGER_CHAT)">
+  <mat-selection-list #user [multiple]="false">
+    <mat-list-option *ngFor="let item of contentItem">
+      <div (click)="getUser(item.login)" class="wrapper-account-user">
+        <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
+        <div class="login-account-user">{{item.login}}</div>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div *ngIf="getActions(TRIGGER_CONTACTS)">
+  <mat-selection-list #user [multiple]="false">
+    <mat-list-option *ngFor="let item of contentItem">
+      <div (click)="getUser(item.login)" class="wrapper-account-user">
+        <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
+        <div class="login-account-user">{{item.login}}</div>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div *ngIf="getActions(TRIGGER_NOTIFICATION)">
+  <mat-selection-list #user [multiple]="false">
+    <mat-list-option *ngFor="let item of contentItem">
+      <div (click)="getUser(item.login)" class="wrapper-account-user">
+        <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
+        <div class="login-account-user">{{item.login}}</div>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
