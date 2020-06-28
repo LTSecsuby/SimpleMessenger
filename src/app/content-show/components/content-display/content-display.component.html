@@ -1,10 +1,20 @@
 <div class="msg-card-wrapper" *ngFor="let item of result">
   <mat-card class="msg-user" *ngIf="item.owner === userName; else notUser">
-    <span>{{userName}}</span><span>  said  </span><span>{{item.msg}}</span>
+    <mat-card-header>
+      <div mat-card-avatar class="header-image-user"></div>
+      <mat-card-title>{{userName}}</mat-card-title>
+      <mat-card-subtitle>{{item.date}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>{{item.msg}}</mat-card-content>
   </mat-card>
   <ng-template #notUser>
     <mat-card class="msg-friend">
-      <span>{{item.owner}}</span><span>  said  </span><span>{{item.msg}}</span>
+      <mat-card-header>
+        <div mat-card-avatar class="header-image-user"></div>
+        <mat-card-title>{{item.owner}}</mat-card-title>
+        <mat-card-subtitle>{{item.date}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>{{item.msg}}</mat-card-content>
     </mat-card>
   </ng-template>
 </div>

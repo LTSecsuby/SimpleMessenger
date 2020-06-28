@@ -15,7 +15,6 @@ export class ContentWrapperComponent implements OnInit {
   TRIGGER_CHAT = TRIGGER_CHAT;
   TRIGGER_CONTACTS = TRIGGER_CONTACTS;
   TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
-  @Input() titleContent: string;
   @Input() contentItem: Object[];
   public defaultImage = '../../../../assets/login-img.png';
   constructor(private dataService: DataService) { }

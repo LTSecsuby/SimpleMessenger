@@ -27,17 +27,18 @@
 
 </mat-toolbar>
 
-<mat-button-toggle-group class="button-toggle-group">
-  <mat-button-toggle (click)="onChangeContent(TRIGGER_FETCH_FRIENDS)" class="button-toggle">
+<mat-button-toggle-group class="button-toggle-group" #group="matButtonToggleGroup">
+  <mat-button-toggle (click)="onChangeContent(TRIGGER_FETCH_FRIENDS)" value="Add contacts" class="button-toggle">
     <mat-icon>person_add_alt_1</mat-icon>
   </mat-button-toggle>
-  <mat-button-toggle (click)="onChangeContent(TRIGGER_CHAT)" class="button-toggle">
+  <mat-button-toggle (click)="onChangeContent(TRIGGER_CHAT)" value="Chat" class="button-toggle">
     <mat-icon>comment</mat-icon>
   </mat-button-toggle>
-  <mat-button-toggle (click)="onChangeContent(TRIGGER_CONTACTS)" class="button-toggle">
+  <mat-button-toggle (click)="onChangeContent(TRIGGER_CONTACTS)" value="Contacts" class="button-toggle">
     <mat-icon>contacts</mat-icon>
   </mat-button-toggle>
-  <mat-button-toggle (click)="onChangeContent(TRIGGER_NOTIFICATION)" class="button-toggle">
+  <mat-button-toggle (click)="onChangeContent(TRIGGER_NOTIFICATION)" value="Notifications" class="button-toggle">
     <mat-icon>notifications</mat-icon>
   </mat-button-toggle>
 </mat-button-toggle-group>
+<mat-list class="selected-value-menu">{{group.value}}</mat-list>

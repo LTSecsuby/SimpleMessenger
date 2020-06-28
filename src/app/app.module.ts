@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { UserContentComponent } from './user-content/user-content.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {ContentShowModule} from './content-show/content-show.module';
+import {MatListModule} from '@angular/material/list';
 
 const appRoutes: Routes = [
   { path: '', component: StartMenuComponent },
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes),
     MatMenuModule,
-    ContentShowModule
+    ContentShowModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

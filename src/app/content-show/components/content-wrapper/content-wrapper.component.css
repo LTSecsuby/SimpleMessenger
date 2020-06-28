@@ -3,6 +3,7 @@
   grid-template-columns: 3fr 1fr;
   align-items: center;
   padding: 1% 2%;
+  margin: 2% 2%;
 }
 
 .wrapper-account-user {
@@ -19,6 +20,43 @@
   height: auto;
 }
 
+.add-friend-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .add-friend-button {
-  align-items: end;
+  margin: 0 2%;
+}
+
+.skip-friend-button {
+  margin: 0 2%;
+}
+
+.user-input-form {
+  min-width: 40%;
+  max-width: 60%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 2%;
+}
+
+.user-input-field {
+  width: 100%;
+  padding-right: 5%;
+}
+
+.user-input-label {
+  color: blue;
+}
+
+.user-input-button {
+}
+
+.user-input-card {
+}
+
+.user-input {
 }
