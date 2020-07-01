@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 
 export interface User {
-  id: number;
-  username: string;
+  _id: string;
+  login: string;
   password: string;
-  dateCreate: Date;
+  addedFriends: Object[];
+  friendRequest: Object[];
 }
 
 export const TRIGGER_FETCH_FRIENDS = 'fetch_friend';
@@ -19,59 +20,30 @@ export class DataService{
   public onChat = false;
   public onContacts = false;
   public onNotification = false;
-  public checkNewUser = true;
-  public arrayUser: User[] = [];
-  public id = 0;
-  private user: any;
-  public idChecked: number = null;
 
-  getCheckNewUser(): boolean {
-    return this.checkNewUser;
-  }
-  setCheckNewUser(): void {
-    this.checkNewUser = !this.checkNewUser;
-  }
-  createNewUser(usernameNew: string, passwordNew: string): void {
-    this.id++;
-    this.arrayUser.push({id: this.id, username: usernameNew, password: passwordNew, dateCreate: new Date()});
-  }
-  getAllUser() {
-    return this.arrayUser;
+  private currentUser: User = null;
+  private currentError: any = null;
+
+  constructor() { }
+
+  getCheckNewUser() {
+    //return this.checkNewUser;
   }
 
-  setCheckedNote(id: number) {
-    this.idChecked = id;
+  setUser(currentUser: User) {
+    this.currentUser = currentUser;
   }
 
-  getOneUserByIdChecked() {
-    this.user = Object.create(null);
-    this.arrayUser.forEach(element => {
-      if (element.id === this.idChecked) {
-        this.user = element;
-      }
-    });
-    return this.user;
+  getUser() {
+    return this.currentUser;
   }
 
-  getOneUserById(idNote: number) {
-    this.user = Object.create(null);
-    this.arrayUser.forEach(element => {
-      if (element.id === idNote) {
-        this.user = element;
-      }
-    });
-    return this.user;
+  setError(currentError: any) {
+    this.currentError = currentError;
   }
 
-  loginUser(username: string, password: string) {
-    let res: any = {error: `${username} not founded..`};
-    this.arrayUser.forEach(user => {
-      if (user.username === username && user.password === password) {
-        res = user;
-        return res;
-      }
-    });
-    return res;
+  getError() {
+    return this.currentError;
   }
 
   setUserNavbarContent(trigger: string) {
@@ -107,5 +79,4 @@ export class DataService{
         this.onNotification = false;
     }
   }
-
 }

@@ -4,6 +4,7 @@ import {DataService, TRIGGER_FETCH_FRIENDS} from '../../../shared/data.service';
 import { TRIGGER_CHAT } from '../../../shared/data.service';
 import { TRIGGER_CONTACTS } from '../../../shared/data.service';
 import { TRIGGER_NOTIFICATION } from '../../../shared/data.service';
+import {SearchUsersService} from '../../../shared/search-users/search-users.service';
 
 @Component({
   selector: 'app-content-wrapper',
@@ -17,7 +18,10 @@ export class ContentWrapperComponent implements OnInit {
   TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
   @Input() contentItem: Object[];
   public defaultImage = '../../../../assets/login-img.png';
-  constructor(private dataService: DataService) { }
+  valueLoginContacts = '';
+
+  constructor(private dataService: DataService,
+              private searchUsersService: SearchUsersService) { }
 
   ngOnInit(): void {}
 

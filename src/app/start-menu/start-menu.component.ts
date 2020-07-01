@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../shared/data.service';
-import {AuthGuard} from '../auth/auth.guard';
+import {AuthGuard} from '../shared/auth/auth.guard';
 
 @Component({
   selector: 'app-start-menu',
@@ -15,7 +15,8 @@ export class StartMenuComponent implements OnInit {
   singup = true;
   login = false;
 
-  constructor(private dataService: DataService, private authGuard: AuthGuard) { }
+  constructor(private dataService: DataService,
+              private authGuard: AuthGuard) { }
 
   ngOnInit(): void {
   }
@@ -31,10 +32,10 @@ export class StartMenuComponent implements OnInit {
   }
 
   onLogin() {
-    this.authGuard.canActivate(this.valueLogin, this.valuePassword);
+    this.authGuard.canActivateAuth(this.valueLogin, this.valuePassword);
   }
 
   onSingup() {
-    this.dataService.createNewUser(this.valueLogin, this.valuePassword);
+    this.authGuard.canActivateSing(this.valueLogin, this.valuePassword);
   }
 }

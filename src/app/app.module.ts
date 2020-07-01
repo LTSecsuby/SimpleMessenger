@@ -21,6 +21,7 @@ import { UserContentComponent } from './user-content/user-content.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {ContentShowModule} from './content-show/content-show.module';
 import {MatListModule} from '@angular/material/list';
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component: StartMenuComponent },
@@ -53,7 +54,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MatMenuModule,
     ContentShowModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
