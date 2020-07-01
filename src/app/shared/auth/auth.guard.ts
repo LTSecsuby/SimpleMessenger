@@ -18,7 +18,7 @@ export class AuthGuard {
       if (this.dataService.getUser() !== null) {
         this.router.navigate(['/user']);
       }
-    }, 200);
+    }, 500);
   }
 
   canActivateSing(username: string, password: string) {
@@ -28,6 +28,6 @@ export class AuthGuard {
         //this.router.navigate(['/user']);
         console.log('Не создано');
       }
-    }, 200);
+    }, 500);
   }
 }
