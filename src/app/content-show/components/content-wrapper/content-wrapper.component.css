@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+.contacts-loading-spinner {
+
+}
+
 .login-account-user {
   padding-left: 5%;
 }

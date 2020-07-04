@@ -10,6 +10,8 @@ import {InputUserPanelComponent} from './components/input-user-panel/input-user-
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [ContentWrapperComponent,
@@ -29,7 +31,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatListModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ContentShowModule { }

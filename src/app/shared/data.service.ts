@@ -23,11 +23,20 @@ export class DataService{
 
   private currentUser: User = null;
   private currentError: any = null;
+  private arrayContacts: Object[] = null;
 
   constructor() { }
 
   getCheckNewUser() {
     //return this.checkNewUser;
+  }
+
+  setContacts(contacts) {
+    this.arrayContacts = contacts;
+  }
+
+  getContacts(): Object[] {
+    return this.arrayContacts;
   }
 
   setUser(currentUser: User) {

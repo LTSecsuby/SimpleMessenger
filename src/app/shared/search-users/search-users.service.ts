@@ -10,6 +10,23 @@ export class SearchUsersService {
   constructor(private dataService: DataService,
               private http: HttpClient) { }
 
+  getContactList(textLogin: string) {
+    const token = localStorage.token;
+
+    const url = `http://localhost:8000/user/search/contacts?q=${textLogin}`;
+
+    this.http.get(url, { headers: {"Authorization" : `Bearer ${token}`} } ).subscribe(
+      data => {
+        this.dataService.setContacts(data.contacts);
+        this.dataService.setError(null);
+      },
+      error => {
+        this.dataService.setError(error);
+        console.log(error);
+      }
+    );
+  }
+
   addNewContact(loginFriend: string) {
 
     const token = localStorage.token;
@@ -28,7 +45,6 @@ export class SearchUsersService {
       },
       error => {
         this.dataService.setError(error);
-        //this.dataService.setUser(null);
         console.log(error);
       }
     );

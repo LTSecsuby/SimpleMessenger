@@ -19,6 +19,7 @@ export class StartMenuComponent implements OnInit {
               private authGuard: AuthGuard) { }
 
   ngOnInit(): void {
+    localStorage.removeItem("token");
   }
 
   onChangeSingup() {

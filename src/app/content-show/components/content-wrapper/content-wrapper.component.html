@@ -1,19 +1,16 @@
 <div *ngIf="getActions(TRIGGER_FETCH_FRIENDS)">
-  <form class="user-input-form">
-    <mat-form-field appearance="outline" class="user-input-field">
-      <mat-label class="user-input-label">Add contact</mat-label>
-      <input matInput class="user-input" #message maxlength="50">
-      <mat-hint align="end">{{message.value.length}} / 50</mat-hint>
-    </mat-form-field>
-  </form>
-  <div *ngFor="let item of contentItem">
-      <mat-card class="wrapper-list">
-        <div class="wrapper-account-user">
-          <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
-          <div class="login-account-user">{{item.login}}</div>
-        </div>
-        <div class="add-friend-button-wrapper"><button mat-raised-button class="add-friend-button" color="primary" (click)="getUser(item.login)">Add</button></div>
-      </mat-card>
+  <input class="user-input" [ngModel]='inputText' (ngModelChange)='inputModelChanged.next($event)' />
+  <mat-spinner *ngIf="isLoading" class="contacts-loading-spinner" diameter="40"></mat-spinner>
+  <div *ngIf="!isLoading">
+    <div *ngFor="let item of contentItem">
+        <mat-card class="wrapper-list">
+          <div class="wrapper-account-user">
+            <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
+            <div class="login-account-user">{{item.login}}</div>
+          </div>
+          <div class="add-friend-button-wrapper"><button mat-raised-button class="add-friend-button" color="primary" (click)="getUser(item.login)">Add</button></div>
+        </mat-card>
+    </div>
   </div>
 </div>
 <div *ngIf="getActions(TRIGGER_CHAT)">

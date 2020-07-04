@@ -16,15 +16,10 @@ export class NavbarContentComponent implements OnInit {
   TRIGGER_CHAT = TRIGGER_CHAT;
   TRIGGER_CONTACTS = TRIGGER_CONTACTS;
   TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
-  public arrayItems: Object[] = [];
 
   constructor(private dataService: DataService) { }
 
-  ngOnInit(): void {
-    this.arrayItems.push({id: '1', login: 'Evgen'});
-    this.arrayItems.push({id: '2', login: 'Evgeniy', img: '../../assets/login-img.png'});
-    this.arrayItems.push({id: '3', login: 'Eugene', img: '../../assets/login-img.png'});
-  }
+  ngOnInit(): void { }
 
   getActions(action: string): boolean {
     if (action === TRIGGER_FETCH_FRIENDS) {
