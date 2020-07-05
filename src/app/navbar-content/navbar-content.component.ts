@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DataService, User} from '../shared/data.service';
 
 import { TRIGGER_FETCH_FRIENDS } from '../shared/data.service';
@@ -16,10 +16,13 @@ export class NavbarContentComponent implements OnInit {
   TRIGGER_CHAT = TRIGGER_CHAT;
   TRIGGER_CONTACTS = TRIGGER_CONTACTS;
   TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
+  @Input() currentUser = null;
 
   constructor(private dataService: DataService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.currentUser = this.dataService.getUser();
+  }
 
   getActions(action: string): boolean {
     if (action === TRIGGER_FETCH_FRIENDS) {

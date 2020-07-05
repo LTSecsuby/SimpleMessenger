@@ -14,5 +14,6 @@
 }
 
 .wrapper-header-list {
-  height: 75%;
+  height: 85%;
+  max-width: 100%;
 }

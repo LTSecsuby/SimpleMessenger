@@ -26,6 +26,7 @@ export class NavbarUserComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.currentUser = this.dataService.getUser();
   }
 
   onLogout() {
@@ -37,7 +38,7 @@ export class NavbarUserComponent implements OnInit {
   }
 
   getNotificationsLength(): number {
-    if (this.dataService.getUser().friendRequest === null) { return 0; }
+    if (this.dataService.getUser() === null) { return 0; }
     return this.dataService.getUser().friendRequest.length;
   }
 }

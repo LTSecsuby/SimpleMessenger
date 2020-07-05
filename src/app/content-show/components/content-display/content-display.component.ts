@@ -15,7 +15,7 @@ export class ContentDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.result = this.userMsg.concat(this.friendMsg);
-    this.result.sort(this.sortByField('date'));
+    this.result.sort(this.sortByField('created'));
   }
 
   sortByField(field) {

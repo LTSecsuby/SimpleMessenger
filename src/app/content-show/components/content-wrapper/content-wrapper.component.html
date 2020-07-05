@@ -27,8 +27,8 @@
 </div>
 <div *ngIf="getActions(TRIGGER_CHAT)">
   <mat-selection-list #user [multiple]="false">
-    <mat-list-option *ngFor="let item of contentItem">
-      <div (click)="getUser(item.login)" class="wrapper-account-user">
+    <mat-list-option *ngFor="let item of chats">
+      <div class="wrapper-account-user">
         <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
         <div class="login-account-user">{{item.login}}</div>
       </div>
@@ -37,8 +37,8 @@
 </div>
 <div *ngIf="getActions(TRIGGER_CONTACTS)">
   <mat-selection-list #user [multiple]="false">
-    <mat-list-option *ngFor="let item of contentItem">
-      <div (click)="getUser(item.login)" class="wrapper-account-user">
+    <mat-list-option *ngFor="let item of contacts">
+      <div class="wrapper-account-user">
         <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
         <div class="login-account-user">{{item.login}}</div>
       </div>
@@ -46,7 +46,7 @@
   </mat-selection-list>
 </div>
 <div *ngIf="getActions(TRIGGER_NOTIFICATION)">
-  <div *ngFor="let item of notification">
+  <div *ngFor="let item of notifications">
     <mat-card class="wrapper-list">
       <div class="wrapper-account-user">
         <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">

@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {fromEvent, Subject, Subscription, timer} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map, scan, switchMap, tap} from 'rxjs/operators';
 
 import {DataService, TRIGGER_FETCH_FRIENDS, User} from '../../../shared/data.service';
 import { TRIGGER_CHAT } from '../../../shared/data.service';
@@ -22,9 +22,10 @@ export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit
   public defaultImage = '../../../../assets/login-img.png';
   public isLoading = false;
   public isNotExist = false;
-  private currentUser: User = null;
-  public notification: Object[] = [];
-
+  public notifications: Object[] = [];
+  public contacts: Object[] = [];
+  public chats: Object[] = [];
+  @Input() currentUser = null;
   @ViewChild('contact') contact: ElementRef;
 
   constructor(private dataService: DataService,
@@ -32,6 +33,7 @@ export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnInit(): void {
     this.loadUser();
+    console.log(this.currentUser);
   }
 
   ngAfterViewInit() {
@@ -39,34 +41,29 @@ export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit
       const searchContact$ = fromEvent<any>(this.contact.nativeElement, 'keyup').pipe(
         map(event => event.target.value),
         debounceTime(1000),
-        distinctUntilChanged()
+        distinctUntilChanged(),
+        tap(() => {
+          this.isLoading = true;
+          this.isNotExist = false;
+        }),
+        tap((value) => {
+            this.searchUsersService.getContactList(value);
+        }),
+        debounceTime(1000),
+        tap(() => {
+          this.contentItem = this.dataService.getContacts();
+          this.loadUser();
+          this.isLoading = false;
+          if (this.contentItem.length === 0) {
+            this.isNotExist = true;
+          }
+        })
       );
-
-      searchContact$.subscribe(res => {
-        console.log(res);
-        this.isLoading = true;
-        this.searchContacts(res);
-        this.isNotExist = false;
-      });
+      searchContact$.subscribe();
     }
   }
 
   ngOnDestroy() { }
-
-  searchContacts(textContact: string) {
-    this.searchUsersService.getContactList(textContact);
-    const source = timer(1000);
-    source.subscribe(() => {
-      this.contentItem = this.dataService.getContacts();
-      this.loadUser();
-      this.isLoading = false;
-    });
-    source.subscribe(() => {
-      if (this.contentItem.length === 0) {
-        this.isNotExist = true;
-      }
-    });
-  }
 
   onSendToAddContact(textContact: string) {
     this.searchUsersService.sendRequestForContact(textContact);
@@ -104,7 +101,8 @@ export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit
 
   loadUser() {
     this.currentUser = this.dataService.getUser();
-    this.notification = this.currentUser.friendRequest;
+    this.notifications = this.currentUser.friendRequest;
+    this.contacts = this.currentUser.addedFriends;
   }
 
   getActions(action: string): boolean {

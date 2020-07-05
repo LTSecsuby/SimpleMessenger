@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService, User} from '../shared/data.service';
 import {AuthService} from '../shared/auth/auth.service';
+import {timer} from 'rxjs';
 
 @Component({
   selector: 'app-user-content',
@@ -15,10 +16,11 @@ export class UserContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getProfile();
-    setTimeout(() => {
+    const source = timer(500);
+    source.subscribe(() => {
       if (this.dataService.getUser() !== null) {
         this.currentUser = this.dataService.getUser();
       }
-    }, 200);
+    });
   }
 }

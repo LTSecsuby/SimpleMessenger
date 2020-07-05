@@ -1,7 +1,7 @@
 <div class="user-content-wrapper">
   <app-navbar-user [currentUser]="currentUser" class="navbar-user"></app-navbar-user>
-  <app-navbar-content class="navbar-content"></app-navbar-content>
-  <app-toolbar-user class="toolbar-user"></app-toolbar-user>
-  <app-toolbar-content class="toolbar-content"></app-toolbar-content>
+  <app-navbar-content [currentUser]="currentUser" class="navbar-content"></app-navbar-content>
+  <app-toolbar-user [currentUser]="currentUser" class="toolbar-user"></app-toolbar-user>
+  <app-toolbar-content [currentUser]="currentUser" class="toolbar-content"></app-toolbar-content>
 </div>
 

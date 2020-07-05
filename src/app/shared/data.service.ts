@@ -8,10 +8,10 @@ export interface User {
   friendRequest: Object[];
 }
 
-export const TRIGGER_FETCH_FRIENDS = 'fetch_friend';
-export const TRIGGER_CHAT = 'chat';
-export const TRIGGER_CONTACTS = 'contacts';
-export const TRIGGER_NOTIFICATION = 'notifications';
+export const TRIGGER_FETCH_FRIENDS = 'fetch_friend_trigger';
+export const TRIGGER_CHAT = 'chat_trigger';
+export const TRIGGER_CONTACTS = 'contacts_trigger';
+export const TRIGGER_NOTIFICATION = 'notifications_trigger';
 
 @Injectable({providedIn: 'root'})
 export class DataService{

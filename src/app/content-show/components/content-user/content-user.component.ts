@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DataService, User} from '../../../shared/data.service';
 
 @Component({
   selector: 'app-content-user',
@@ -6,10 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./content-user.component.css']
 })
 export class ContentUserComponent implements OnInit {
-  @Input() user: any;
+  @Input() currentUser: User = null;
   public defaultImage = '../../../../assets/login-img.png';
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentUser = this.dataService.getUser();
+  }
 
 }
