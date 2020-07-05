@@ -22,6 +22,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {ContentShowModule} from './content-show/content-show.module';
 import {MatListModule} from '@angular/material/list';
 import {HttpClientModule} from '@angular/common/http';
+import {MatBadgeModule} from '@angular/material/badge';
 
 const appRoutes: Routes = [
   { path: '', component: StartMenuComponent },
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
     MatMenuModule,
     ContentShowModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

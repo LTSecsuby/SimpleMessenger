@@ -36,4 +36,8 @@ export class NavbarUserComponent implements OnInit {
     this.dataService.setUserNavbarContent(trigger);
   }
 
+  getNotificationsLength(): number {
+    if (this.dataService.getUser().friendRequest === null) { return 0; }
+    return this.dataService.getUser().friendRequest.length;
+  }
 }

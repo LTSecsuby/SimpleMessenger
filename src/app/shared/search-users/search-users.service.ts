@@ -39,9 +39,8 @@ export class SearchUsersService {
 
     this.http.post(url, body, { headers: {"Authorization" : `Bearer ${token}`} } ).subscribe(
       data => {
-        //this.dataService.setUser(data.user[0]);
+        this.dataService.setUser(data);
         this.dataService.setError(null);
-        console.log(data);
       },
       error => {
         this.dataService.setError(error);
@@ -49,4 +48,48 @@ export class SearchUsersService {
       }
     );
   }
+
+  skipNewContact(loginContact: string) {
+    const token = localStorage.token;
+
+    const url = `http://localhost:8000/user/friend/skip`;
+
+    const body = {
+      friend: loginContact
+    };
+
+    this.http.post(url, body, { headers: {"Authorization" : `Bearer ${token}`} } ).subscribe(
+      data => {
+        this.dataService.setUser(data);
+        this.dataService.setError(null);
+      },
+      error => {
+        this.dataService.setError(error);
+        console.log(error);
+      }
+    );
+  }
+
+  sendRequestForContact(loginFriend: string) {
+
+    const token = localStorage.token;
+
+    const url = `http://localhost:8000/user/friend`;
+
+    const body = {
+      friend: loginFriend
+    };
+
+    this.http.post(url, body, { headers: {"Authorization" : `Bearer ${token}`} } ).subscribe(
+      data => {
+        this.dataService.setUser(data);
+        this.dataService.setError(null);
+      },
+      error => {
+        this.dataService.setError(error);
+        console.log(error);
+      }
+    );
+  }
+
 }

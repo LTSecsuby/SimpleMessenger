@@ -1,8 +1,8 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Subject, Subscription, timer} from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {fromEvent, Subject, Subscription, timer} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 
-import {DataService, TRIGGER_FETCH_FRIENDS} from '../../../shared/data.service';
+import {DataService, TRIGGER_FETCH_FRIENDS, User} from '../../../shared/data.service';
 import { TRIGGER_CHAT } from '../../../shared/data.service';
 import { TRIGGER_CONTACTS } from '../../../shared/data.service';
 import { TRIGGER_NOTIFICATION } from '../../../shared/data.service';
@@ -13,52 +13,98 @@ import {SearchUsersService} from '../../../shared/search-users/search-users.serv
   templateUrl: './content-wrapper.component.html',
   styleUrls: ['./content-wrapper.component.css']
 })
-export class ContentWrapperComponent implements OnInit, OnDestroy {
+export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
   TRIGGER_FETCH_FRIENDS = TRIGGER_FETCH_FRIENDS;
   TRIGGER_CHAT = TRIGGER_CHAT;
   TRIGGER_CONTACTS = TRIGGER_CONTACTS;
   TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
-  public contentItem: Object[];
+  public contentItem: User[] = [];
   public defaultImage = '../../../../assets/login-img.png';
   public isLoading = false;
+  public isNotExist = false;
+  private currentUser: User = null;
+  public notification: Object[] = [];
 
-  public inputText: string;
-  private inputModelChanged: Subject<string> = new Subject<string>();
-  private inputModelChangeSubscription: Subscription;
+  @ViewChild('contact') contact: ElementRef;
 
   constructor(private dataService: DataService,
               private searchUsersService: SearchUsersService) { }
 
   ngOnInit(): void {
-    this.inputModelChangeSubscription = this.inputModelChanged
-      .pipe(
-        debounceTime(1000),
-        distinctUntilChanged()
-      )
-      .subscribe(contactText => {
-        this.inputText = contactText;
-        this.isLoading = true;
-        this.searchContacts(contactText);
-        console.log(contactText);
-      });
+    this.loadUser();
   }
 
-  ngOnDestroy() {
-    this.inputModelChangeSubscription.unsubscribe();
+  ngAfterViewInit() {
+    if (this.getActions(TRIGGER_FETCH_FRIENDS)) {
+      const searchContact$ = fromEvent<any>(this.contact.nativeElement, 'keyup').pipe(
+        map(event => event.target.value),
+        debounceTime(1000),
+        distinctUntilChanged()
+      );
+
+      searchContact$.subscribe(res => {
+        console.log(res);
+        this.isLoading = true;
+        this.searchContacts(res);
+        this.isNotExist = false;
+      });
+    }
   }
+
+  ngOnDestroy() { }
 
   searchContacts(textContact: string) {
     this.searchUsersService.getContactList(textContact);
-    //this.searchUsersService.addNewContact(textContact);
     const source = timer(1000);
     source.subscribe(() => {
       this.contentItem = this.dataService.getContacts();
+      this.loadUser();
       this.isLoading = false;
+    });
+    source.subscribe(() => {
+      if (this.contentItem.length === 0) {
+        this.isNotExist = true;
+      }
     });
   }
 
-  getUser(user: any) {
-    console.log(user);
+  onSendToAddContact(textContact: string) {
+    this.searchUsersService.sendRequestForContact(textContact);
+    const source = timer(500);
+    source.subscribe(() => {
+      this.loadUser();
+    });
+  }
+
+  onAddContact(textContact: string) {
+    this.searchUsersService.addNewContact(textContact);
+    const source = timer(500);
+    source.subscribe(() => {
+      this.loadUser();
+    });
+  }
+
+  onSkipContact(textContact: string) {
+    this.searchUsersService.skipNewContact(textContact);
+    const source = timer(500);
+    source.subscribe(() => {
+      this.loadUser();
+    });
+  }
+
+  getDisabledButton(loginContacts: string): boolean {
+    let bool = false;
+    this.currentUser.addedFriends.forEach(friends => {
+      if (friends.login === loginContacts) {
+        bool = true;
+      }
+    });
+    return bool;
+  }
+
+  loadUser() {
+    this.currentUser = this.dataService.getUser();
+    this.notification = this.currentUser.friendRequest;
   }
 
   getActions(action: string): boolean {

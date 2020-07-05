@@ -38,7 +38,7 @@
     <mat-icon>contacts</mat-icon>
   </mat-button-toggle>
   <mat-button-toggle (click)="onChangeContent(TRIGGER_NOTIFICATION)" value="Notifications" class="button-toggle">
-    <mat-icon>notifications</mat-icon>
+    <mat-icon matBadge="{{getNotificationsLength()}}" [matBadgeHidden]="getNotificationsLength() === 0" matBadgeColor="primary">notifications</mat-icon>
   </mat-button-toggle>
 </mat-button-toggle-group>
 <mat-list class="selected-value-menu">{{group.value}}</mat-list>

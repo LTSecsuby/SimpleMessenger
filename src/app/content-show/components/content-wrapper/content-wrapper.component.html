@@ -1,6 +1,12 @@
 <div *ngIf="getActions(TRIGGER_FETCH_FRIENDS)">
-  <input class="user-input" [ngModel]='inputText' (ngModelChange)='inputModelChanged.next($event)' />
-  <mat-spinner *ngIf="isLoading" class="contacts-loading-spinner" diameter="40"></mat-spinner>
+  <form class="user-input-form">
+    <mat-form-field appearance="outline" class="user-input-field">
+      <mat-label class="user-input-label">Search contacts</mat-label>
+      <input matInput type="text" class="user-input" placeholder="search..." autocomplete="off" #contact maxlength="30">
+      <mat-hint align="end">{{contact.value.length}} / 30</mat-hint>
+    </mat-form-field>
+  </form>
+  <div class="contacts-loading-spinner-wrapper"><mat-spinner *ngIf="isLoading" class="contacts-loading-spinner" diameter="40"></mat-spinner></div>
   <div *ngIf="!isLoading">
     <div *ngFor="let item of contentItem">
         <mat-card class="wrapper-list">
@@ -8,9 +14,15 @@
             <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
             <div class="login-account-user">{{item.login}}</div>
           </div>
-          <div class="add-friend-button-wrapper"><button mat-raised-button class="add-friend-button" color="primary" (click)="getUser(item.login)">Add</button></div>
+          <div class="add-friend-button-wrapper"><button mat-raised-button class="add-friend-button" color="primary" [disabled]="getDisabledButton(item.login)" (click)="onSendToAddContact(item.login)">Add</button></div>
         </mat-card>
     </div>
+  </div>
+  <div *ngIf="isNotExist">
+      <mat-card class="wrapper-list">
+        <mat-label class="user-input-label">Contacts not exist...</mat-label>
+        <div class="add-friend-button-wrapper"><button mat-raised-button class="add-friend-button" color="primary" [disabled]="true" style="visibility: hidden">Add</button></div>
+      </mat-card>
   </div>
 </div>
 <div *ngIf="getActions(TRIGGER_CHAT)">
@@ -34,15 +46,15 @@
   </mat-selection-list>
 </div>
 <div *ngIf="getActions(TRIGGER_NOTIFICATION)">
-  <div *ngFor="let item of contentItem">
+  <div *ngFor="let item of notification">
     <mat-card class="wrapper-list">
       <div class="wrapper-account-user">
         <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
         <div class="login-account-user">{{item.login}}</div>
       </div>
       <div class="add-friend-button-wrapper">
-        <button mat-raised-button class="add-friend-button" color="primary" (click)="getUser(item.login)">Add</button>
-        <button mat-raised-button class="skip-friend-button" color="warn" (click)="getUser(item.login)">Skip</button>
+        <button mat-raised-button class="add-friend-button" color="primary" (click)="onAddContact(item.login)">Add</button>
+        <button mat-raised-button class="skip-friend-button" color="warn" (click)="onSkipContact(item.login)">Skip</button>
       </div>
     </mat-card>
   </div>

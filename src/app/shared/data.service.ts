@@ -23,7 +23,7 @@ export class DataService{
 
   private currentUser: User = null;
   private currentError: any = null;
-  private arrayContacts: Object[] = null;
+  private arrayContacts: User[] = null;
 
   constructor() { }
 
@@ -35,7 +35,7 @@ export class DataService{
     this.arrayContacts = contacts;
   }
 
-  getContacts(): Object[] {
+  getContacts(): User[] {
     return this.arrayContacts;
   }
 

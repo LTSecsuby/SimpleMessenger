@@ -15,6 +15,11 @@
 
 }
 
+.contacts-loading-spinner-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .login-account-user {
   padding-left: 5%;
 }
@@ -39,8 +44,6 @@
 }
 
 .user-input-form {
-  min-width: 40%;
-  max-width: 60%;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -49,10 +52,10 @@
 
 .user-input-field {
   width: 100%;
-  padding-right: 5%;
 }
 
 .user-input-label {
+  text-align: center;
   color: blue;
 }
 
