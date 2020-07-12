@@ -2,7 +2,7 @@
 
   <mat-toolbar-row class="toolbar-row">
 
-    <span *ngIf="currentUser !== null">{{currentUser.login}}</span>
+    <span *ngIf="currentUser !== undefined">{{currentUser.login}}</span>
 
     <div>
       <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -38,7 +38,7 @@
     <mat-icon>contacts</mat-icon>
   </mat-button-toggle>
   <mat-button-toggle (click)="onChangeContent(TRIGGER_NOTIFICATION)" value="Notifications" class="button-toggle">
-    <mat-icon matBadge="{{getNotificationsLength()}}" [matBadgeHidden]="getNotificationsLength() === 0" matBadgeColor="primary">notifications</mat-icon>
+    <mat-icon matBadge="{{getNotificationsValue()}}" [matBadgeHidden]="getNotificationsValue() === 0" matBadgeColor="primary">notifications</mat-icon>
   </mat-button-toggle>
 </mat-button-toggle-group>
 <mat-list class="selected-value-menu">{{group.value}}</mat-list>

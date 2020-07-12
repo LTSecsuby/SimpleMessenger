@@ -16,12 +16,12 @@ export class NavbarContentComponent implements OnInit {
   TRIGGER_CHAT = TRIGGER_CHAT;
   TRIGGER_CONTACTS = TRIGGER_CONTACTS;
   TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
-  @Input() currentUser = null;
+  currentUser: User;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.dataService.getUser();
+    this.dataService.currentUser.subscribe(user => this.currentUser = user);
   }
 
   getActions(action: string): boolean {

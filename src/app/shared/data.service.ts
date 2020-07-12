@@ -1,50 +1,53 @@
 import {Injectable} from '@angular/core';
-
-export interface User {
-  _id: string;
-  login: string;
-  password: string;
-  addedFriends: Object[];
-  friendRequest: Object[];
-}
+import {BehaviorSubject} from 'rxjs';
 
 export const TRIGGER_FETCH_FRIENDS = 'fetch_friend_trigger';
 export const TRIGGER_CHAT = 'chat_trigger';
 export const TRIGGER_CONTACTS = 'contacts_trigger';
 export const TRIGGER_NOTIFICATION = 'notifications_trigger';
 
+export class User {
+  _id: string = '';
+  login: string = '';
+  password: string = '';
+  addedFriends: Object[] = [];
+  friendRequest: Object[] = [];
+  contacts: User[] = [];
+}
+
+export class Contact {
+  _id: string = '';
+  login: string = '';
+}
+
 @Injectable({providedIn: 'root'})
 export class DataService{
+
+  private userSource = new BehaviorSubject<User>(new User());
+  currentUser = this.userSource.asObservable();
+
+  private contactSource = new BehaviorSubject<Contact>(new Contact());
+  currentContact = this.contactSource.asObservable();
 
   public onFetchFriends = false;
   public onChat = false;
   public onContacts = false;
   public onNotification = false;
 
-  private currentUser: User = null;
   private currentError: any = null;
-  private arrayContacts: User[] = null;
 
   constructor() { }
 
-  getCheckNewUser() {
-    //return this.checkNewUser;
+  updatedUser(user: User) {
+    this.userSource.next(user);
   }
 
-  setContacts(contacts) {
-    this.arrayContacts = contacts;
-  }
-
-  getContacts(): User[] {
-    return this.arrayContacts;
-  }
-
-  setUser(currentUser: User) {
-    this.currentUser = currentUser;
+  updatedCurrentContact(contact: Contact) {
+    this.contactSource.next(contact);
   }
 
   getUser() {
-    return this.currentUser;
+    return this.currentUser.source._value.user;
   }
 
   setError(currentError: any) {

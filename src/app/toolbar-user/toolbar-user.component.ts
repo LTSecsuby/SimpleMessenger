@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DataService} from '../shared/data.service';
+import {DataService, User} from '../shared/data.service';
 
 @Component({
   selector: 'app-toolbar-user',
@@ -7,11 +7,11 @@ import {DataService} from '../shared/data.service';
   styleUrls: ['./toolbar-user.component.css']
 })
 export class ToolbarUserComponent implements OnInit {
-  @Input() currentUser = null;
+  currentUser: User;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.dataService.getUser();
+    this.dataService.currentUser.subscribe(user => this.currentUser = user);
   }
 }

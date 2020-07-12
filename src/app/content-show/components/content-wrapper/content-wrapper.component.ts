@@ -21,19 +21,26 @@ export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit
   public contentItem: User[] = [];
   public defaultImage = '../../../../assets/login-img.png';
   public isLoading = false;
-  public isNotExist = false;
+
   public notifications: Object[] = [];
   public contacts: Object[] = [];
   public chats: Object[] = [];
-  @Input() currentUser = null;
+  currentUser: User;
+
   @ViewChild('contact') contact: ElementRef;
 
   constructor(private dataService: DataService,
               private searchUsersService: SearchUsersService) { }
 
   ngOnInit(): void {
-    this.loadUser();
-    console.log(this.currentUser);
+    this.dataService.currentUser.subscribe(user => {
+      this.isLoading = false;
+      this.currentUser = user;
+      if (user === null) { return; }
+      this.contentItem = user.contacts;
+      this.notifications = user.friendRequest;
+      this.contacts = user.addedFriends;
+    });
   }
 
   ngAfterViewInit() {
@@ -42,21 +49,9 @@ export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit
         map(event => event.target.value),
         debounceTime(1000),
         distinctUntilChanged(),
-        tap(() => {
-          this.isLoading = true;
-          this.isNotExist = false;
-        }),
         tap((value) => {
-            this.searchUsersService.getContactList(value);
-        }),
-        debounceTime(1000),
-        tap(() => {
-          this.contentItem = this.dataService.getContacts();
-          this.loadUser();
-          this.isLoading = false;
-          if (this.contentItem.length === 0) {
-            this.isNotExist = true;
-          }
+          this.isLoading = true;
+          this.searchUsersService.getContactList(value);
         })
       );
       searchContact$.subscribe();
@@ -67,30 +62,19 @@ export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit
 
   onSendToAddContact(textContact: string) {
     this.searchUsersService.sendRequestForContact(textContact);
-    const source = timer(500);
-    source.subscribe(() => {
-      this.loadUser();
-    });
   }
 
   onAddContact(textContact: string) {
     this.searchUsersService.addNewContact(textContact);
-    const source = timer(500);
-    source.subscribe(() => {
-      this.loadUser();
-    });
   }
 
   onSkipContact(textContact: string) {
     this.searchUsersService.skipNewContact(textContact);
-    const source = timer(500);
-    source.subscribe(() => {
-      this.loadUser();
-    });
   }
 
   getDisabledButton(loginContacts: string): boolean {
     let bool = false;
+    if (this.currentUser === undefined) { return bool; }
     this.currentUser.addedFriends.forEach(friends => {
       if (friends.login === loginContacts) {
         bool = true;
@@ -99,10 +83,8 @@ export class ContentWrapperComponent implements OnInit, OnDestroy, AfterViewInit
     return bool;
   }
 
-  loadUser() {
-    this.currentUser = this.dataService.getUser();
-    this.notifications = this.currentUser.friendRequest;
-    this.contacts = this.currentUser.addedFriends;
+  onChangeContact(item) {
+    this.dataService.updatedCurrentContact(item);
   }
 
   getActions(action: string): boolean {

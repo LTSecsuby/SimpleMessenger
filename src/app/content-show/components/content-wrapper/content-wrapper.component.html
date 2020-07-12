@@ -18,15 +18,9 @@
         </mat-card>
     </div>
   </div>
-  <div *ngIf="isNotExist">
-      <mat-card class="wrapper-list">
-        <mat-label class="user-input-label">Contacts not exist...</mat-label>
-        <div class="add-friend-button-wrapper"><button mat-raised-button class="add-friend-button" color="primary" [disabled]="true" style="visibility: hidden">Add</button></div>
-      </mat-card>
-  </div>
 </div>
 <div *ngIf="getActions(TRIGGER_CHAT)">
-  <mat-selection-list #user [multiple]="false">
+  <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let item of chats">
       <div class="wrapper-account-user">
         <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
@@ -36,9 +30,9 @@
   </mat-selection-list>
 </div>
 <div *ngIf="getActions(TRIGGER_CONTACTS)">
-  <mat-selection-list #user [multiple]="false">
+  <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let item of contacts">
-      <div class="wrapper-account-user">
+      <div class="wrapper-account-user" (click)="onChangeContact(item)">
         <img class="image-account-user" src="{{item.img === undefined ? defaultImage : item.img}}" alt="image_{{item.login}}">
         <div class="login-account-user">{{item.login}}</div>
       </div>

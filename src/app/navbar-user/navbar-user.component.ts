@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {DataService} from '../shared/data.service';
+import {DataService, User} from '../shared/data.service';
 
 import { TRIGGER_FETCH_FRIENDS } from '../shared/data.service';
 import { TRIGGER_CHAT } from '../shared/data.service';
@@ -19,14 +19,19 @@ export class NavbarUserComponent implements OnInit {
   TRIGGER_CHAT = TRIGGER_CHAT;
   TRIGGER_CONTACTS = TRIGGER_CONTACTS;
   TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
-  @Input() currentUser = null;
+  currentUser: User;
+  notificationsValue: number;
 
   constructor(private router: Router,
               private dataService: DataService,
               private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.dataService.getUser();
+    this.dataService.currentUser.subscribe(user => {
+      this.currentUser = user;
+      if (user === null) { return; }
+      this.notificationsValue = user.friendRequest.length;
+    });
   }
 
   onLogout() {
@@ -37,8 +42,7 @@ export class NavbarUserComponent implements OnInit {
     this.dataService.setUserNavbarContent(trigger);
   }
 
-  getNotificationsLength(): number {
-    if (this.dataService.getUser() === null) { return 0; }
-    return this.dataService.getUser().friendRequest.length;
+  getNotificationsValue(): number {
+    return this.notificationsValue;
   }
 }

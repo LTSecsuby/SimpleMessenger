@@ -1,6 +1,15 @@
-<mat-card *ngIf="currentUser !== null" class="wrapper-header-list">
+<mat-card *ngIf="currentContact.login !== ''; else user" class="wrapper-header-list">
   <div class="wrapper-list">
-    <img class="image-account-user" src="{{currentUser.img === undefined ? defaultImage : currentUser.img}}" alt="image_{{currentUser.login}}">
-    <span class="login-account-user">{{currentUser.login}}</span>
+    <img class="image-account-user" src="{{currentContact.img === undefined ? defaultImage : currentContact.img}}" alt="image_{{currentContact.login}}">
+    <span class="login-account-user">{{currentContact.login}}</span>
   </div>
 </mat-card>
+
+<ng-template #user>
+  <mat-card class="wrapper-header-list">
+    <div class="wrapper-list">
+      <img class="image-account-user" src="{{currentUser.img === undefined ? defaultImage : currentUser.img}}" alt="image_{{currentUser.login}}">
+      <span class="login-account-user">{{currentUser.login}}</span>
+    </div>
+  </mat-card>
+</ng-template>

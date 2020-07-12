@@ -18,9 +18,7 @@ export class StartMenuComponent implements OnInit {
   constructor(private dataService: DataService,
               private authGuard: AuthGuard) { }
 
-  ngOnInit(): void {
-    localStorage.removeItem("token");
-  }
+  ngOnInit(): void { }
 
   onChangeSingup() {
     this.singup = true;

@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import {DataService} from '../data.service';
 import {HttpClient} from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class SearchUsersService {
 
   constructor(private dataService: DataService,
@@ -17,7 +15,8 @@ export class SearchUsersService {
 
     this.http.get(url, { headers: {"Authorization" : `Bearer ${token}`} } ).subscribe(
       data => {
-        this.dataService.setContacts(data.contacts);
+        console.log('GET_CONTACTS', data.user);
+        this.dataService.updatedUser(data.user);
         this.dataService.setError(null);
       },
       error => {
@@ -39,7 +38,9 @@ export class SearchUsersService {
 
     this.http.post(url, body, { headers: {"Authorization" : `Bearer ${token}`} } ).subscribe(
       data => {
-        this.dataService.setUser(data);
+        console.log('ADD_CONTACT', data);
+        this.dataService.updatedUser(data);
+        //this.dataService.setUser(data);
         this.dataService.setError(null);
       },
       error => {
@@ -60,7 +61,9 @@ export class SearchUsersService {
 
     this.http.post(url, body, { headers: {"Authorization" : `Bearer ${token}`} } ).subscribe(
       data => {
-        this.dataService.setUser(data);
+        console.log('SEND_REQUEST', data);
+        this.dataService.updatedUser(data);
+        //this.dataService.setUser(data);
         this.dataService.setError(null);
       },
       error => {
@@ -82,7 +85,9 @@ export class SearchUsersService {
 
     this.http.post(url, body, { headers: {"Authorization" : `Bearer ${token}`} } ).subscribe(
       data => {
-        this.dataService.setUser(data);
+        console.log('SEND_REQUEST', data);
+        this.dataService.updatedUser(data);
+        //this.dataService.setUser(data);
         this.dataService.setError(null);
       },
       error => {

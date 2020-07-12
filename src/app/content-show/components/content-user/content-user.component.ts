@@ -7,12 +7,14 @@ import {DataService, User} from '../../../shared/data.service';
   styleUrls: ['./content-user.component.css']
 })
 export class ContentUserComponent implements OnInit {
-  @Input() currentUser: User = null;
+  currentContact: any;
+  currentUser: User;
   public defaultImage = '../../../../assets/login-img.png';
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.dataService.getUser();
+    this.dataService.currentContact.subscribe(contact => this.currentContact = contact);
+    this.dataService.currentUser.subscribe(user => this.currentUser = user);
   }
 
 }

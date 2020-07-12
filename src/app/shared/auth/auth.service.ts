@@ -21,22 +21,26 @@ export class AuthService {
 
     this.http.post(url, body).subscribe(
       data => {
-        this.dataService.setUser(data.user[0]);
+        console.log('LOGIN', data.user[0]);
+        this.dataService.updatedUser(data.user[0]);
+        //this.dataService.setUser(data.user[0]);
         this.dataService.setError(null);
         localStorage.setItem("token", data.token);
+        this.router.navigate(['/user']).then(r => console.log('TO LOGIN'));
         //console.log(data.token);
       },
       error => {
         this.dataService.setError(error);
-        this.dataService.setUser(null);
+        this.dataService.updatedUser(null);
         console.log(error);
       }
     );
   }
 
   logoutUser() {
+    this.dataService.updatedUser(null);
     localStorage.removeItem("token");
-    this.router.navigate(['/start']);
+    this.router.navigate(['/start']).then(r => console.log('TO START'));
   }
 
   getProfile() {
@@ -45,12 +49,14 @@ export class AuthService {
 
     this.http.get(url, { headers: {"Authorization" : `Bearer ${token}`} }).subscribe(
       data => {
-        this.dataService.setUser(data.user);
+        console.log('PROFILE', data.user);
+        this.dataService.updatedUser(data.user);
+        //this.dataService.setUser(data.user);
         this.dataService.setError(null);
       },
       error => {
         console.log(error);
-        this.dataService.setUser(null);
+        this.dataService.updatedUser(null);
         this.dataService.setError(error);
         this.logoutUser();
       }

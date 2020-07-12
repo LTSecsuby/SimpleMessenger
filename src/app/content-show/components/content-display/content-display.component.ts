@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Contact, DataService, User} from '../../../shared/data.service';
 
 @Component({
   selector: 'app-content-display',
@@ -6,16 +7,18 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./content-display.component.css']
 })
 export class ContentDisplayComponent implements OnInit {
-  @Input() userMsg: Object[];
-  @Input() friendMsg: Object[];
-  @Input() userName: string;
-  result: any;
 
-  constructor() { }
+  result: any;
+  currentUser: User;
+  currentContact: Contact;
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.result = this.userMsg.concat(this.friendMsg);
-    this.result.sort(this.sortByField('created'));
+    //this.result = this.userMsg.concat(this.friendMsg);
+    //this.result.sort(this.sortByField('created'));
+    this.dataService.currentUser.subscribe(user => this.currentUser = user);
+    this.dataService.currentContact.subscribe(contact => this.currentContact = contact);
   }
 
   sortByField(field) {
