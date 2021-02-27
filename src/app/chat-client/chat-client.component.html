@@ -1,0 +1,21 @@
+<span class="app-chat-wrapper">
+  <div *ngIf="!menuToggle" (click)="menuToggle = !menuToggle" class="app-chat-label-wrapper">
+    <mat-icon class="app-chat-icon-email">mail</mat-icon>
+    <span class="app-chat-text" id="blinker_text">Напишите нам</span>
+  </div>
+  <div *ngIf="menuToggle" class="app-chat-menu">
+    <mat-icon class="app-chat-icon-close" (click)="menuToggle = !menuToggle">close</mat-icon>
+    <mat-toolbar color="primary" class="app-chat-label-menu">Задайте свой вопрос тут</mat-toolbar>
+    <form class="app-chat-input-form">
+      <mat-form-field appearance="outline" class="user-input-field">
+        <mat-label class="user-input-label">Введите сообщение</mat-label>
+        <textarea (keypress)="onPressEnter($event, message.value)" [matTextareaAutosize]="true" #message matInput maxlength="500"></textarea>
+        <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
+      </mat-form-field>
+      <button (click)="onAddPostToContact(message.value)" mat-fab [disabled]="message.value.length === 0" class="user-input-button" color="primary" aria-label="user_send_button">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </div>
+</span>
+

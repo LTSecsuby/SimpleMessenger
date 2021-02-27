@@ -1,5 +1,3 @@
-<app-content-wrapper *ngIf="getActions(TRIGGER_FETCH_FRIENDS)"></app-content-wrapper>
-<app-content-wrapper *ngIf="getActions(TRIGGER_CHAT)"></app-content-wrapper>
-<app-content-wrapper *ngIf="getActions(TRIGGER_CONTACTS)"></app-content-wrapper>
-<app-content-wrapper *ngIf="getActions(TRIGGER_NOTIFICATION)"></app-content-wrapper>
-
+<app-user-notifications *ngIf="navbarContentTrigger === 2"></app-user-notifications>
+<app-user-contents *ngIf="navbarContentTrigger === 1"></app-user-contents>
+<app-fetch-friends *ngIf="navbarContentTrigger === 0"></app-fetch-friends>

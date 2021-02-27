@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../shared/data.service';
 import {AuthGuard} from '../shared/auth/auth.guard';
+import {AuthService} from '../shared/auth/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-start-menu',
@@ -16,9 +18,17 @@ export class StartMenuComponent implements OnInit {
   login = false;
 
   constructor(private dataService: DataService,
-              private authGuard: AuthGuard) { }
+              private authGuard: AuthGuard,
+              private authService: AuthService,
+              private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    /*if (this.router.url !== '/') {
+      this.router.navigate(['/']).then(r => console.log('TO START'));
+    }*/
+    //localStorage.removeItem("token");
+    this.authService.getProfile();
+  }
 
   onChangeSingup() {
     this.singup = true;

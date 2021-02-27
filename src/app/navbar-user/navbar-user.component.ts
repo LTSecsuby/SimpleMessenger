@@ -1,11 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {DataService, User} from '../shared/data.service';
-
-import { TRIGGER_FETCH_FRIENDS } from '../shared/data.service';
-import { TRIGGER_CHAT } from '../shared/data.service';
-import { TRIGGER_CONTACTS } from '../shared/data.service';
-import { TRIGGER_NOTIFICATION } from '../shared/data.service';
+import {DataService, navbarContentElement, User} from '../shared/data.service';
 import {AuthService} from '../shared/auth/auth.service';
 
 
@@ -15,10 +10,10 @@ import {AuthService} from '../shared/auth/auth.service';
   styleUrls: ['./navbar-user.component.css']
 })
 export class NavbarUserComponent implements OnInit {
-  TRIGGER_FETCH_FRIENDS = TRIGGER_FETCH_FRIENDS;
-  TRIGGER_CHAT = TRIGGER_CHAT;
-  TRIGGER_CONTACTS = TRIGGER_CONTACTS;
-  TRIGGER_NOTIFICATION = TRIGGER_NOTIFICATION;
+  TRIGGER_FETCH_FRIENDS = navbarContentElement.TRIGGER_FETCH_FRIENDS;
+  //TRIGGER_CHAT = TRIGGER_CHAT;
+  TRIGGER_CONTACTS = navbarContentElement.TRIGGER_CONTACTS;
+  TRIGGER_NOTIFICATION = navbarContentElement.TRIGGER_NOTIFICATION;
   currentUser: User;
   notificationsValue: number;
 
@@ -38,7 +33,7 @@ export class NavbarUserComponent implements OnInit {
     this.authService.logoutUser();
   }
 
-  onChangeContent(trigger: string) {
+  onChangeContent(trigger: navbarContentElement) {
     this.dataService.setUserNavbarContent(trigger);
   }
 

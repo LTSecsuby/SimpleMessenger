@@ -6,6 +6,9 @@
 .wrapper-list {
   display: flex;
   align-items: center;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .login-account-user {
@@ -14,6 +17,8 @@
 }
 
 .wrapper-header-list {
-  height: 85%;
-  max-width: 100%;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }

@@ -1,7 +1,7 @@
 .wrapper-content {
   background-color: white;
-  border: 1px solid silver;
-  padding: 1%;
-  margin: 1%;
-  height: 90%;
+  align-items: center;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
 }

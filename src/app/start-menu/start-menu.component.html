@@ -1,47 +1,42 @@
 <div class="start-menu">
-
   <mat-toolbar color="primary">
-    <h1>START MENU</h1>
+    <h1>Стартовая страница</h1>
   </mat-toolbar>
-
   <mat-card>
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle checked (change)="onChangeSingup()" value="italic">Sign up</mat-button-toggle>
-      <mat-button-toggle (change)="onChangeLogin()" value="italic">Log in</mat-button-toggle>
+      <mat-button-toggle checked (change)="onChangeSingup()" value="italic">Регистрация</mat-button-toggle>
+      <mat-button-toggle (change)="onChangeLogin()" value="italic">Авторизация</mat-button-toggle>
     </mat-button-toggle-group>
-
     <mat-card *ngIf="login">
       <form>
         <mat-form-field>
-          <mat-label>Log in</mat-label>
+          <mat-label>Введите логин</mat-label>
           <input matInput [(ngModel)]="valueLogin" [ngModelOptions]="{ standalone: true }">
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input matInput [(ngModel)]="valuePassword" [ngModelOptions]="{ standalone: true }">
+          <mat-label>Введите пароль</mat-label>
+          <input type="password" matInput [(ngModel)]="valuePassword" [ngModelOptions]="{ standalone: true }">
         </mat-form-field>
       </form>
-      <button (click)="onLogin()" [disabled]="valueLogin.length < 1 || valuePassword.length < 1" mat-raised-button color="primary">LOGIN</button>
+      <button (click)="onLogin()" [disabled]="valueLogin.length < 1 || valuePassword.length < 1" mat-raised-button color="primary">Авторизироваться</button>
     </mat-card>
 
     <mat-card *ngIf="singup">
       <form>
         <mat-form-field>
-          <mat-label>Log in</mat-label>
+          <mat-label>Введите логин</mat-label>
           <input matInput required [(ngModel)]="valueLogin" [ngModelOptions]="{ standalone: true }">
-          <mat-hint align="end">minimum 5 characters</mat-hint>
+          <mat-hint align="end">минимум 5 символов</mat-hint>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input matInput required [(ngModel)]="valuePassword" [ngModelOptions]="{ standalone: true }">
-          <mat-hint align="end">minimum 8 characters</mat-hint>
+          <mat-label>Введите пароль</mat-label>
+          <input type="password" matInput required [(ngModel)]="valuePassword" [ngModelOptions]="{ standalone: true }">
+          <mat-hint align="end">минимум 8 символов</mat-hint>
         </mat-form-field>
       </form>
-      <button (click)="onSingup()" [disabled]="valueLogin.length < 5 || valuePassword.length < 8" mat-raised-button color="primary">SINGUP</button>
+      <button (click)="onSingup()" [disabled]="valueLogin.length < 5 || valuePassword.length < 8" mat-raised-button color="primary">Зарегистрироваться</button>
     </mat-card>
-
   </mat-card>
-
 </div>

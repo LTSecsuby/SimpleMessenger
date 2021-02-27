@@ -23,10 +23,11 @@ import {ContentShowModule} from './content-show/content-show.module';
 import {MatListModule} from '@angular/material/list';
 import {HttpClientModule} from '@angular/common/http';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {ChatClientComponent} from './chat-client/chat-client.component';
 
 const appRoutes: Routes = [
   { path: '', component: StartMenuComponent },
-  { path: 'start', component: StartMenuComponent },
   { path: 'user', component: UserContentComponent },
   { path: '**', component: StartMenuComponent }
   ];
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     NavbarUserComponent,
     ToolbarUserComponent,
     ToolbarContentComponent,
-    UserContentComponent
+    UserContentComponent,
+    ChatClientComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     ContentShowModule,
     MatListModule,
     HttpClientModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

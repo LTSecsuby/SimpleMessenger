@@ -1,10 +1,28 @@
-.user-input-form {
-  min-width: 40%;
-  max-width: 60%;
+.wrapper-input-user-panel {
+  height: 100%;
+  width: 100%;
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
   justify-content: space-between;
-  padding: 1%;
+}
+
+.wrapper-input-user-panel-card {
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-input-form {
+  min-width: 60%;
+  max-width: 80%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 .user-input-field {
@@ -21,4 +39,43 @@
 
 .user-input-card {
   background-color: silver;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper-list {
+  background-color: #deebff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  width: fit-content;
+  max-width: 50%;
+}
+
+.wrapper-list.class-right-message {
+  float: right;
+}
+
+.wrapper-list.class-left-message {
+  float: left;
+}
+
+.input-user-panel-name-text.class-right-message {
+  width: 100%;
+  text-align: end;
+}
+
+.input-user-panel-name-text.class-left-message {
+  width: 100%;
+  text-align: start;
+}
+
+.mat-icon-done {
+  float: right;
+  padding-left: 10px;
 }

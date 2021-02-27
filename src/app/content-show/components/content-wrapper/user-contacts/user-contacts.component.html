@@ -1,0 +1,14 @@
+<mat-selection-list [multiple]="false">
+  <mat-list-option *ngFor="let item of contacts">
+    <mat-card class="wrapper-account-contact" (click)="onChangeContact(item, $event)">
+      <span class="text-account-contact">
+        <img class="image-account-user" src="{{item.profilePicture === undefined ? defaultImage : item.profilePicture}}" alt="image_{{item.login}}">
+        <div class="login-account-user">{{item.login}}</div>
+      </span>
+      <div class="add-friend-button-wrapper">
+        <button mat-raised-button id="contact_delete_button" class="skip-friend-button" color="warn" (click)="onDeleteFriend(item)">Удалить</button>
+      </div>
+    </mat-card>
+  </mat-list-option>
+</mat-selection-list>
+

@@ -1,43 +1,40 @@
 <mat-toolbar color="primary">
-
   <mat-toolbar-row class="toolbar-row">
-
     <span *ngIf="currentUser !== undefined">{{currentUser.login}}</span>
-
     <div>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_horiz</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
+        <div [ngStyle]="{'text-align': 'center', 'color': '#673ab7'}">Главное меню</div>
         <button mat-menu-item>
           <mat-icon>account_box</mat-icon>
-          <span>User</span>
+          <span>Профиль</span>
         </button>
         <button mat-menu-item>
           <mat-icon>settings_applications</mat-icon>
-          <span>Settings</span>
+          <span>Настройки</span>
         </button>
         <button (click)="onLogout()" mat-menu-item>
           <mat-icon>exit_to_app</mat-icon>
-          <span>Exit</span>
+          <span>Выйти</span>
         </button>
       </mat-menu>
     </div>
   </mat-toolbar-row>
-
 </mat-toolbar>
 
 <mat-button-toggle-group class="button-toggle-group" #group="matButtonToggleGroup">
-  <mat-button-toggle (click)="onChangeContent(TRIGGER_FETCH_FRIENDS)" value="Add contacts" class="button-toggle">
+  <mat-button-toggle (click)="onChangeContent(TRIGGER_FETCH_FRIENDS)" value="Добавить контакт" class="button-toggle">
     <mat-icon>person_add_alt_1</mat-icon>
   </mat-button-toggle>
-  <mat-button-toggle (click)="onChangeContent(TRIGGER_CHAT)" value="Chat" class="button-toggle">
+  <!--<mat-button-toggle (click)="onChangeContent(TRIGGER_CHAT)" value="Chat" class="button-toggle">
     <mat-icon>comment</mat-icon>
-  </mat-button-toggle>
-  <mat-button-toggle (click)="onChangeContent(TRIGGER_CONTACTS)" value="Contacts" class="button-toggle">
+  </mat-button-toggle>-->
+  <mat-button-toggle (click)="onChangeContent(TRIGGER_CONTACTS)" value="Контакты" class="button-toggle">
     <mat-icon>contacts</mat-icon>
   </mat-button-toggle>
-  <mat-button-toggle (click)="onChangeContent(TRIGGER_NOTIFICATION)" value="Notifications" class="button-toggle">
+  <mat-button-toggle (click)="onChangeContent(TRIGGER_NOTIFICATION)" value="Уведомления" class="button-toggle">
     <mat-icon matBadge="{{getNotificationsValue()}}" [matBadgeHidden]="getNotificationsValue() === 0" matBadgeColor="primary">notifications</mat-icon>
   </mat-button-toggle>
 </mat-button-toggle-group>

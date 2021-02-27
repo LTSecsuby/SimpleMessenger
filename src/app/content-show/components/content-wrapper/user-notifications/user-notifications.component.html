@@ -1,0 +1,14 @@
+<div>
+  <div *ngFor="let item of notifications">
+    <mat-card class="wrapper-list">
+      <div class="wrapper-account-user">
+        <img class="image-account-user" src="{{item.profilePicture === undefined ? defaultImage : item.profilePicture}}" alt="image_{{item.login}}">
+        <div class="login-account-user">{{item.login}}</div>
+      </div>
+      <div class="add-friend-button-wrapper">
+        <button mat-raised-button class="add-friend-button" color="primary" (click)="onAddContact(item._id)">Добавить</button>
+        <button mat-raised-button class="skip-friend-button" color="warn" (click)="onSkipContact(item._id)">Отменить</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

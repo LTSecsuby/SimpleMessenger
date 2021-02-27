@@ -1,11 +1,28 @@
-<form class="user-input-form">
-  <mat-form-field appearance="outline" class="user-input-field">
-    <mat-label class="user-input-label">Message</mat-label>
-    <input matInput #message maxlength="500">
-    <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
-  </mat-form-field>
-  <button mat-fab [disabled]="message.value.length === 0" class="user-input-button" color="primary" aria-label="user_send_button">
-    <mat-icon>send</mat-icon>
-  </button>
-</form>
-
+<div class="wrapper-input-user-panel">
+  <mat-card class="wrapper-input-user-panel-card">
+    <div class="wrap">
+      <div *ngFor="let item of currentContactMessages">
+        <mat-card class="wrapper-list" [class.class-right-message]="item.owner === currentUser._id" [class.class-left-message]="item.owner !== currentUser._id">
+          <div class="input-user-panel-name-text" [class.class-right-message]="item.owner === currentUser._id" [class.class-left-message]="item.owner !== currentUser._id">
+            <span [ngStyle]="item.owner === currentUser._id ? {'padding-right': '25px', 'color': 'blue', 'text-decoration': 'underline'} : {'padding-right': '25px', 'color': 'red', 'text-decoration': 'underline'}">{{item.owner === currentUser._id ? 'Вы' : currentContact.login}}</span>
+            <span [ngStyle]="{'color': '#673ab7'}">{{getDate(item.created.toString())}}</span>
+          </div>
+          <div>
+            <span>{{item.text}}</span>
+            <mat-icon class="mat-icon-done" *ngIf="item.owner === currentUser._id" [ngStyle]="item.markRead ? {'color': 'blue'} : {'color': 'grey'}">done</mat-icon>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <form *ngIf="currentContact.login" class="user-input-form">
+      <mat-form-field appearance="outline" class="user-input-field">
+        <mat-label class="user-input-label">Введите сообщение</mat-label>
+        <textarea (keypress)="onPressEnter($event, message.value)" [matTextareaAutosize]="true" #message matInput maxlength="500"></textarea>
+        <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
+      </mat-form-field>
+      <button (click)="onAddPostToContact(message.value)" mat-fab [disabled]="message.value.length === 0" class="app-chat-input-button" color="primary" aria-label="user_send_button">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </mat-card>
+</div>

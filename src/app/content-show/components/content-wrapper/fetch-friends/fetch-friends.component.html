@@ -1,0 +1,21 @@
+<div>
+  <form class="user-input-form">
+    <mat-form-field appearance="outline" class="user-input-field">
+      <mat-label class="user-input-label">Введите логин</mat-label>
+      <input matInput type="text" class="user-input" autocomplete="off" #contact maxlength="30">
+      <mat-hint align="end">{{contact.value.length}} / 30</mat-hint>
+    </mat-form-field>
+  </form>
+  <div class="contacts-loading-spinner-wrapper"><mat-spinner *ngIf="isLoading" class="contacts-loading-spinner" diameter="40"></mat-spinner></div>
+  <div *ngIf="!isLoading">
+    <div *ngFor="let item of contentItem">
+        <mat-card class="wrapper-list">
+          <div class="wrapper-account-user">
+            <img class="image-account-user" src="{{item.profilePicture === undefined ? defaultImage : item.profilePicture}}" alt="image_{{item.login}}">
+            <div class="login-account-user">{{item.login}}</div>
+          </div>
+          <div class="add-friend-button-wrapper"><button mat-raised-button class="add-friend-button" color="primary" [disabled]="getDisabledButton(item._id)" (click)="onSendToAddContact(item._id)">Добавить</button></div>
+        </mat-card>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,22 @@
 .wrapper-account-user {
   display: flex;
   align-items: center;
+  flex-direction: row;
+}
+
+.wrapper-account-contact {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1% 2%!important;
+}
+
+.text-account-contact {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .contacts-loading-spinner {
@@ -22,6 +38,7 @@
 
 .login-account-user {
   padding-left: 5%;
+  font-size: large;
 }
 
 .image-account-user {

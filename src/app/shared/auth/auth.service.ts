@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {DataService} from '../data.service';
+import {DataService, User} from '../data.service';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +16,14 @@ export class AuthService {
     const url = `http://localhost:8000/user/login`;
     const body = {
       login: username,
-      password: password
+      password
     };
 
     this.http.post(url, body).subscribe(
-      data => {
-        console.log('LOGIN', data.user[0]);
-        this.dataService.updatedUser(data.user[0]);
-        //this.dataService.setUser(data.user[0]);
+      (data: any) => {
+        console.log('LOGIN', data.user);
+        this.dataService.updatedUser(data.user);
+        //this.dataService.setUser(data.user);
         this.dataService.setError(null);
         localStorage.setItem("token", data.token);
         this.router.navigate(['/user']).then(r => console.log('TO LOGIN'));
@@ -40,7 +40,7 @@ export class AuthService {
   logoutUser() {
     this.dataService.updatedUser(null);
     localStorage.removeItem("token");
-    this.router.navigate(['/start']).then(r => console.log('TO START'));
+    this.router.navigate(['/']).then(r => console.log('TO START'));
   }
 
   getProfile() {
@@ -49,10 +49,15 @@ export class AuthService {
 
     this.http.get(url, { headers: {"Authorization" : `Bearer ${token}`} }).subscribe(
       data => {
-        console.log('PROFILE', data.user);
-        this.dataService.updatedUser(data.user);
+        // @ts-ignore
+        const user: User = data.user;
+        console.log('PROFILE', user);
+        this.dataService.updatedUser(user);
         //this.dataService.setUser(data.user);
         this.dataService.setError(null);
+        if (this.router.url === '/') {
+          this.router.navigate(['/user']).then(r => console.log('TO LOGIN'));
+        }
       },
       error => {
         console.log(error);

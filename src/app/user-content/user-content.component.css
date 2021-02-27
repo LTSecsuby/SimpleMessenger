@@ -1,6 +1,6 @@
 .user-content-wrapper {
   display: grid;
-  grid-template-rows: 2fr 5fr;
+  grid-template-rows: 1fr 4fr;
   grid-template-columns: 2fr 5fr;
   grid-template-areas:
     " navbar-user toolbar-user "
@@ -23,7 +23,6 @@
   grid-area: toolbar-user;
   background-color: white;
   border: 1px solid silver;
-  padding: 1%;
 }
 
 .toolbar-content {
